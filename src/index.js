@@ -29,7 +29,7 @@ class App extends React.Component {
     this.state = {
       counterP: 0,
       counterNtrl: 0,
-      counterN:0
+      counterN: 0
     }
   }
 
@@ -80,7 +80,6 @@ class App extends React.Component {
         <DisplayN textN="Negative" counterN={this.state.counterN}/>
         </div>
       </div>
-      
     )
   }
 }
