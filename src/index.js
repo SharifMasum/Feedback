@@ -90,13 +90,14 @@ class App extends React.Component {
         <DisplayNtrl textNtrl="Neutral" counterNtrl={this.state.counterNtrl}/>
         <DisplayBd textN="Bad" counterBd={this.state.counterBd}/>
         <DisplayAvg text="Average"
-                        counterAvg={(((this.state.counterGd)*1)+
-                        ((this.state.counterNtrl)*0)+((this.state.counterBd)*(-1))/3)
-                        .toFixed(2)}/>
+                        counterAvg={((((this.state.counterGd)*1)+
+                        ((this.state.counterNtrl)*0)+((this.state.counterBd)*(-1)))/
+                        ((this.state.counterGd)+(this.state.counterNtrl)+
+                        (this.state.counterBd))||0).toFixed(2)}/>
         <DisplayGdPtg text="Good percentage"
                         counterGdPtg={(((this.state.counterGd)*100)/
-                        (this.state.counterGd)+(this.state.counterNtrl)+
-                        (this.state.counterBd)||0).toFixed(2)}/>
+                        ((this.state.counterGd)+(this.state.counterNtrl)+
+                        (this.state.counterBd))||0).toFixed(2)}/>
         </div>
       </div>
     )
