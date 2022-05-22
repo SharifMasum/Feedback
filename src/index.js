@@ -11,31 +11,41 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
-const DisplayP = (props) => (
-<div> {props.textP} {props.counterP}</div>
+const DisplayGd = (props) => (
+<div> {props.textP} {props.counterGd}</div>
 )
 
 const DisplayNtrl = (props) => (
   <div> {props.textNtrl} {props.counterNtrl}</div>
   )
 
-const DisplayN = (props) => (
-  <div> {props.textN} {props.counterN}</div>
+const DisplayBd = (props) => (
+  <div> {props.textN} {props.counterBd}</div>
+  )
+
+const DisplayAvg = (props) => (
+  <div> {props.text} {props.counterAvg}</div>
+  )
+
+const DisplayGdPtg = (props) => (
+  <div> {props.text} {props.counterGdPtg}%</div>
   )
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      counterP: 0,
+      counterGd: 0,
       counterNtrl: 0,
-      counterN: 0
+      counterBd: 0,
+      counterAvg: 0,
+      counterGdPtg: 0
     }
   }
 
-  setValueP = (value) => {
+  setValueGd = (value) => {
     return () => {
-      this.setState({ counterP: value })
+      this.setState({ counterGd: value })
     }
   }
 
@@ -45,11 +55,12 @@ class App extends React.Component {
     }
   }
 
-  setValueN = (value) => {
+  setValueBd = (value) => {
     return () => {
-      this.setState({ counterN: value })
+      this.setState({ counterBd: value })
     }
   }
+
 
   render() {
     return (
@@ -58,26 +69,34 @@ class App extends React.Component {
         <Title title="Give feedback" />
         </h1>
         <div>
-          <Button 
-            handleClick={this.setValueP(this.state.counterP + 1)} 
-            text="Positive" 
+          <Button
+            handleClick={this.setValueGd(this.state.counterGd + 1)}
+            text="Good"
           />
-          <Button 
-            handleClick={this.setValueNtrl(this.state.counterNtrl + 1)} 
-            text="Neutral" 
+          <Button
+            handleClick={this.setValueNtrl(this.state.counterNtrl + 1)}
+            text="Neutral"
           />
-          <Button 
-            handleClick={this.setValueN(this.state.counterN + 1)} 
-            text="Negative" 
+          <Button
+            handleClick={this.setValueBd(this.state.counterBd + 1)}
+            text="Bad"
           />
         </div>
         <h2>
           <Title title="Statistics"/>
         </h2>
         <div>
-        <DisplayP textP="Positive" counterP={this.state.counterP}/>
+        <DisplayGd textP="Good" counterGd={this.state.counterGd}/>
         <DisplayNtrl textNtrl="Neutral" counterNtrl={this.state.counterNtrl}/>
-        <DisplayN textN="Negative" counterN={this.state.counterN}/>
+        <DisplayBd textN="Bad" counterBd={this.state.counterBd}/>
+        <DisplayAvg text="Average"
+                        counterAvg={(((this.state.counterGd)*1)+
+                        ((this.state.counterNtrl)*0)+((this.state.counterBd)*(-1))/3)
+                        .toFixed(2)}/>
+        <DisplayGdPtg text="Good percentage"
+                        counterGdPtg={(((this.state.counterGd)*100)/
+                        (this.state.counterGd)+(this.state.counterNtrl)+
+                        (this.state.counterBd)||0).toFixed(2)}/>
         </div>
       </div>
     )
@@ -85,5 +104,5 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-<App />, 
+<App />,
 document.getElementById('root'))
