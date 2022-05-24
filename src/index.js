@@ -11,9 +11,35 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
-const Statistics = (props) => (
-  <div> {props.text} {props.counter}</div>
-)
+const Statistic = (props) => {
+  return (
+    <div> {props.text} {props.counter}</div>
+  )
+}
+
+const Statistics = ({counterGd, counterNtrl, counterBd}) => {
+  if ((counterGd + counterNtrl + counterBd) === 0) {
+    return (
+      <em>No statistics available</em>
+    )
+  }
+  return (
+    <div>
+    <Statistic text="Good" counter={counterGd}/>
+    <Statistic text="Neutral" counter={counterNtrl}/>
+    <Statistic text="Bad" counter={counterBd}/>
+    <Statistic text="Average"
+                    counter={((((counterGd)*1)+
+                    ((counterNtrl)*0)+((counterBd)*(-1)))/
+                    ((counterGd)+(counterNtrl)+
+                    (counterBd))||0).toFixed(2)}/>
+    <Statistic text="Good percentage"
+                    counter={(((counterGd)*100)/
+                    ((counterGd)+(counterNtrl)+
+                    (counterBd))||0).toFixed(2)}/>
+    </div>
+  )
+}
 
 class App extends React.Component {
   constructor() {
@@ -43,7 +69,6 @@ class App extends React.Component {
     }
   }
 
-
   render() {
     return (
       <div>
@@ -68,18 +93,9 @@ class App extends React.Component {
           <Title title="Statistics"/>
         </h2>
         <div>
-        <Statistics text="Good" counter={this.state.counterGd}/>
-        <Statistics text="Neutral" counter={this.state.counterNtrl}/>
-        <Statistics text="Bad" counter={this.state.counterBd}/>
-        <Statistics text="Average"
-                        counter={((((this.state.counterGd)*1)+
-                        ((this.state.counterNtrl)*0)+((this.state.counterBd)*(-1)))/
-                        ((this.state.counterGd)+(this.state.counterNtrl)+
-                        (this.state.counterBd))||0).toFixed(2)}/>
-        <Statistics text="Good percentage"
-                        counter={(((this.state.counterGd)*100)/
-                        ((this.state.counterGd)+(this.state.counterNtrl)+
-                        (this.state.counterBd))||0).toFixed(2)}/>
+        <Statistics counterGd={this.state.counterGd} 
+        counterNtrl={this.state.counterNtrl} 
+        counterBd={this.state.counterBd} />
         </div>
       </div>
     )
