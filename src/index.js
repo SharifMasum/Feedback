@@ -13,7 +13,10 @@ const Button = ({ handleClick, text }) => (
 
 const Statistic = (props) => {
   return (
-    <div> {props.text} {props.counter}</div>
+    <tr>
+      <td> {props.text} </td>
+      <td> {props.counter} </td>
+    </tr>  
   )
 }
 
