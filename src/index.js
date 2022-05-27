@@ -13,10 +13,12 @@ const Button = ({ handleClick, text }) => (
 
 const Statistic = (props) => {
   return (
-    <tr>
-      <td> {props.text} </td>
-      <td> {props.counter} </td>
-    </tr>  
+      <tbody>
+        <tr>
+          <td> {props.text} </td>
+          <td> {props.counter} </td>
+        </tr>
+      </tbody>  
   )
 }
 
@@ -27,7 +29,7 @@ const Statistics = ({counterGd, counterNtrl, counterBd}) => {
     )
   }
   return (
-    <div>
+    <table>
     <Statistic text="Good" counter={counterGd}/>
     <Statistic text="Neutral" counter={counterNtrl}/>
     <Statistic text="Bad" counter={counterBd}/>
@@ -40,7 +42,7 @@ const Statistics = ({counterGd, counterNtrl, counterBd}) => {
                     counter={(((counterGd)*100)/
                     ((counterGd)+(counterNtrl)+
                     (counterBd))||0).toFixed(2)}/>
-    </div>
+    </table>
   )
 }
 
