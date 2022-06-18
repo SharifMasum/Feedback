@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './style.css'
 
 const Title = (props) => (
   <div>{props.title}</div>
@@ -13,36 +14,36 @@ const Button = ({ handleClick, text }) => (
 
 const Statistic = (props) => {
   return (
-      <tbody>
-        <tr>
-          <td> {props.text} </td>
-          <td> {props.counter} </td>
-        </tr>
-      </tbody>  
+    <table className='table'>
+      <tr>
+        <td> {props.text} </td>
+        <td> {props.counter} </td>
+      </tr>
+    </table>
   )
 }
 
-const Statistics = ({counterGd, counterNtrl, counterBd}) => {
+const Statistics = ({ counterGd, counterNtrl, counterBd }) => {
   if ((counterGd + counterNtrl + counterBd) === 0) {
     return (
-      <em>No statistics available</em>
+      <em>No statistics available, press button to see statistics</em>
     )
   }
   return (
-    <table>
-    <Statistic text="Good" counter={counterGd}/>
-    <Statistic text="Neutral" counter={counterNtrl}/>
-    <Statistic text="Bad" counter={counterBd}/>
-    <Statistic text="Average"
-                    counter={((((counterGd)*1)+
-                    ((counterNtrl)*0)+((counterBd)*(-1)))/
-                    ((counterGd)+(counterNtrl)+
-                    (counterBd))||0).toFixed(2)}/>
-    <Statistic text="Good percentage"
-                    counter={(((counterGd)*100)/
-                    ((counterGd)+(counterNtrl)+
-                    (counterBd))||0).toFixed(2)}/>
-    </table>
+    <div>
+      <Statistic text="Good" counter={counterGd} />
+      <Statistic text="Neutral" counter={counterNtrl} />
+      <Statistic text="Bad" counter={counterBd} />
+      <Statistic text="Average"
+        counter={((((counterGd) * 1) +
+          ((counterNtrl) * 0) + ((counterBd) * (-1))) /
+          ((counterGd) + (counterNtrl) +
+            (counterBd)) || 0).toFixed(2)} />
+      <Statistic text="Good percentage"
+        counter={(((counterGd) * 100) /
+          ((counterGd) + (counterNtrl) +
+            (counterBd)) || 0).toFixed(2)} />
+    </div>
   )
 }
 
@@ -77,9 +78,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>
-        <Title title="Give feedback"/>
-        </h1>
+        <header>
+          <h1>Feedback Application</h1>
+        </header>
+        <h2 className='title'>
+          <Title title="Press button to give feedback" />
+        </h2>
         <div>
           <Button
             handleClick={this.setValueGd(this.state.counterGd + 1)}
@@ -94,19 +98,20 @@ class App extends React.Component {
             text="Bad"
           />
         </div>
-        <h2>
-          <Title title="Statistics"/>
+        <h2 className='stats'>
+          <Title title="Statistics" />
         </h2>
         <div>
-        <Statistics counterGd={this.state.counterGd} 
-        counterNtrl={this.state.counterNtrl} 
-        counterBd={this.state.counterBd} />
+          <Statistics counterGd={this.state.counterGd}
+            counterNtrl={this.state.counterNtrl}
+            counterBd={this.state.counterBd} />
         </div>
+        <footer>&copy; Md Shariful Islam, 2022</footer>
       </div>
     )
   }
 }
 
 ReactDOM.render(
-<App />,
-document.getElementById('root'))
+  <App />,
+  document.getElementById('root'))
