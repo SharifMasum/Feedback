@@ -106,7 +106,7 @@ class App extends React.Component {
             counterNtrl={this.state.counterNtrl}
             counterBd={this.state.counterBd} />
         </div>
-        <footer>&copy; Md Shariful Islam, 2022</footer>
+        <footer className='footer'>&copy; Md Shariful Islam, 2022</footer>
       </div>
     )
   }
